@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+  nebula-api:
+    image: localhost/nebula-api:latest
+    depends_on: 
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://localhost:27017/
+
+volumes:
+  nebula-mongo:
+    external: true
