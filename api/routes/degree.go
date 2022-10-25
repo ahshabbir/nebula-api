@@ -11,5 +11,23 @@ func DegreeRoute(router *gin.Engine) {
 	degreeGroup := router.Group("/degree")
 
 	degreeGroup.GET("/", controllers.DegreeSearch())
+
+	/**
+	* @api [get] /degree/{id}
+	* bodyContentType: "application/json"
+	* description: "Returns the degree with given ID"
+	* parameters:
+	* - name: "id"
+	*   in: "path"
+	*   description: "ID of the degree to get"
+	*   required: true
+	*   schema:
+	*      type: "string"
+	* responses:
+	*   "200":
+	*     description: "A degree"
+	*     schema:
+	*       $ref: '#/components/schemas/Degree'
+	 */
 	degreeGroup.GET("/:id", controllers.DegreeById())
 }

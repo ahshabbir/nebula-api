@@ -1,0 +1,265 @@
+{
+  "openapi": "3.1.*",
+  "info": {
+    "title": "Nebula Labs API",
+    "summary": "The public Nebula Labs API",
+    "description": "The public Nebula Labs API for access to pertinent UT Dallas data",
+    "termsOfService": "",
+    "contact": {
+      "name": "",
+      "url": "",
+      "email": ""
+    },
+    "license": {
+      "name": "",
+      "url": ""
+    },
+    "version": "0.1.0"
+  },
+  "host": "api.utdnebula.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/course": {
+      "get": {
+        "bodyContentType": "application/json",
+        "description": "Returns all courses matching the query's string-typed key-value pairs",
+        "responses": {
+          "200": {
+            "description": "A list of courses",
+            "schema": {
+              "type": "array"
+            }
+          },
+          "items": {
+            "$ref": "#/components/schemas/Course"
+          }
+        }
+      }
+    },
+    "/course/{id}": {
+      "get": {
+        "bodyContentType": "application/json",
+        "description": "Returns the course with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the course to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A course",
+            "schema": {
+              "$ref": "#/components/schemas/Course"
+            }
+          }
+        }
+      }
+    },
+    "/degree/{id}": {
+      "get": {
+        "bodyContentType": "application/json",
+        "description": "Returns the degree with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the degree to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A degree",
+            "schema": {
+              "$ref": "#/components/schemas/Degree"
+            }
+          }
+        }
+      }
+    },
+    "/exam/{id}": {
+      "get": {
+        "bodyContentType": "application/json",
+        "description": "Returns the exam with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the exam to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An exam",
+            "schema": {
+              "$ref": "#/components/schemas/Exam"
+            }
+          }
+        }
+      }
+    },
+    "/professor/{id}": {
+      "get": {
+        "bodyContentType": "application/json",
+        "description": "Returns the professor with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the professor to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A professor",
+            "schema": {
+              "$ref": "#/components/schemas/Professor"
+            }
+          }
+        }
+      }
+    },
+    "/section/{id}": {
+      "get": {
+        "bodyContentType": "application/json",
+        "description": "Returns the section with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the section to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A section",
+            "schema": {
+              "$ref": "#/components/schemas/Section"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Location": {
+        "properties": {
+          "building": {
+            "type": "string"
+          },
+          "room": {
+            "type": "string"
+          },
+          "map_uri": {
+            "type": "string"
+          }
+        }
+      },
+      "Meeting": {
+        "properties": {
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "meeting_days": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "start_time": {
+            "type": "string"
+          },
+          "end_time": {
+            "type": "string"
+          },
+          "modality": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          }
+        }
+      },
+      "Professor": {
+        "required": [
+          "_id",
+          "first_name",
+          "last_name",
+          "email"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "titles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "office": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "profile_uri": {
+            "type": "string"
+          },
+          "image_uri": {
+            "type": "string"
+          },
+          "office_hours": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Meeting"
+            }
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
