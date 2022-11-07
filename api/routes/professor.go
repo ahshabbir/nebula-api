@@ -10,7 +10,7 @@ func ProfessorRoute(router *gin.Engine) {
 	// All routes related to professors come here
 	professorGroup := router.Group("/professor")
 
-	// @TODO: Handle 'titles' 'office_hours' and 'sections'
+	// OpenAPI Specification:
 	/**
 	* @api [get] /professor
 	* scope: public
@@ -26,6 +26,12 @@ func ProfessorRoute(router *gin.Engine) {
 	* - name: "last_name"
 	*   in: "query"
 	*   description: "The professor's last name"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "titles"
+	*   in: "query"
+	*   description: "One of the professor's title"
 	*   required: false
 	*   schema:
 	*      type: "string"
@@ -71,6 +77,66 @@ func ProfessorRoute(router *gin.Engine) {
 	*   required: false
 	*   schema:
 	*      type: "string"
+	* - name: "office_hours.start_date"
+	*   in: "query"
+	*   description: "The start date of one of the office hours meetings of the professor"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.end_date"
+	*   in: "query"
+	*   description: "The end date of one of the office hours meetings of the professor"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.meeting_days"
+	*   in: "query"
+	*   description: "One of the days that one of the office hours meetings of the professor"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.start_time"
+	*   in: "query"
+	*   description: "The time one of the office hours meetings of the professor starts"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.end_time"
+	*   in: "query"
+	*   description: "The time one of the office hours meetings of the professor ends"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.modality"
+	*   in: "query"
+	*   description: "The modality of one of the office hours meetings of the professor"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.location.building"
+	*   in: "query"
+	*   description: "The building of one of the office hours meetings of the professor"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.location.room"
+	*   in: "query"
+	*   description: "The room of one of the office hours meetings of the professor"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "office_hours.location.map_uri"
+	*   in: "query"
+	*   description: "A hyperlink to the UTD room locator of one of the office hours meetings of the professor"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "sections"
+	*   in: "query"
+	*   description: "The _id of one of the sections the professor teaches"
+	*   required: false
+	*   schema:
+	*      type: "string"
 	* responses:
 	*   "200":
 	*     description: "A list of professors"
@@ -82,6 +148,7 @@ func ProfessorRoute(router *gin.Engine) {
 
 	professorGroup.GET("/", controllers.ProfessorSearch())
 
+	// OpenAPI Specification:
 	/**
 	* @api [get] /professor/{id}
 	* bodyContentType: "application/json"

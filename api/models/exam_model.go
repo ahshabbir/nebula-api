@@ -7,7 +7,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// @TODO: Polymorphism
 // OpenAPI Specification:
 /**
 * @schema Exam

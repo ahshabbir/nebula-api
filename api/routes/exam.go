@@ -10,7 +10,8 @@ func ExamRoute(router *gin.Engine) {
 	// All routes related to exams come here
 	examGroup := router.Group("/exam")
 
-	// @TODO: Handle 'yields'
+	// OpenAPI Specification:
+	// @TODO: Handle 'yields' and 'placement' (following update to endpoint)
 	/**
 	* @api [get] /exam
 	* scope: public

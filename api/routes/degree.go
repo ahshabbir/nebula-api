@@ -12,6 +12,7 @@ func DegreeRoute(router *gin.Engine) {
 
 	degreeGroup.GET("/", controllers.DegreeSearch())
 
+	// OpenAPI Specification:
 	/**
 	* @api [get] /degree/{id}
 	* bodyContentType: "application/json"

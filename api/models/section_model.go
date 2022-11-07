@@ -2,9 +2,8 @@ package models
 
 // @TODO
 
-// @TODO: Handle 'attributes'
-
 // OpenAPI Specification:
+// @TODO: Handle 'attributes'
 /**
 * @schema Section
 * required:
