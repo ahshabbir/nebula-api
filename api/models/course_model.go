@@ -2,6 +2,59 @@ package models
 
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
+// OpenAPI Specification:
+/**
+* @schema Course
+* required:
+* - _id
+* - course_number
+* - subject_prefix
+* - title
+* - description
+* - school
+* - credit_hours
+* - class_level
+* - activity_type
+* - grading
+* - internal_course_number
+* - lecture_contact_hours
+* - laboratory_contact_hours
+* - offering_frequency
+* properties:
+*   _id:
+*     type: string
+*   course_number:
+*     type: string
+*   subject_prefix:
+*     type: string
+*   title:
+*     type: string
+*   description:
+*     type: string
+*   school:
+*     type: string
+*   credit_hours:
+*     type: string
+*   class_level:
+*     type: string
+*   activity_type:
+*     type: string
+*   grading:
+*     type: string
+*   internal_course_number:
+*     type: string
+*   prerequisites:
+*     $ref: "#/components/schemas/CollectionRequirement"
+*   corequisites:
+*     $ref: "#/components/schemas/CollectionRequirement"
+*   lecture_contact_hours:
+*     type: string
+*   laboratory_contact_hours:
+*     type: string
+*   offering_frequency:
+*     type: string
+ */
+
 // @TODO: Fix Model
 type Course struct {
 	Id     primitive.ObjectID     `bson:"_id" json:"_id" validate:"required"`

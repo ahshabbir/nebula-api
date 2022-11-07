@@ -7,6 +7,214 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// OpenAPI Specification:
+/**
+* @schema Requirement
+* required:
+* - type
+* properties:
+*   type: string
+* discriminator:
+*   propertyName: type
+*   mapping:
+*     course: CourseRequirement
+*     section: SectionRequirement
+*     exam: ExamRequirement
+*     major: MajorRequirement
+*     minor: MinorRequirement
+*     gpa: GPARequirement
+*     consent: ConsentRequirement
+*     collection: CollectionRequirement
+*     hours: HoursRequirement
+*     other: OtherRequirement
+*     choice: ChoiceRequirement
+*     limit: LimitRequirement
+*     core: CoreRequirement
+ */
+
+/**
+* @schema CourseRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - class_reference
+* - minimum_grade
+* properties:
+*   class_reference:
+*     type: string
+*   minimum_grade:
+*     type: string
+ */
+
+/**
+* @schema SectionRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - section_reference
+* properties:
+*   section_reference:
+*     type: string
+ */
+
+/**
+* @schema ExamRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - exam_reference
+* - minimum_score
+* properties:
+*   exam_reference:
+*     type: string
+*   minimum_score:
+*     type: integer
+ */
+
+/**
+* @schema MajorRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - major
+* properties:
+*   major:
+*     type: string
+ */
+
+/**
+* @schema MinorRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - minor
+* properties:
+*   minor:
+*     type: string
+ */
+
+/**
+* @schema GPARequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - minimum
+* properties:
+*   subset:
+*     type: string
+*   minimum:
+*     type: number
+ */
+
+/**
+* @schema ConsentRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - granter
+* properties:
+*   granter:
+*     type: string
+ */
+
+/**
+* @schema CollectionRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - name
+* - required
+* - options
+* properties:
+*   name:
+*     type: string
+*   required:
+*     type: integer
+*   options:
+*     type: array
+*     items:
+*     - $ref: '#/components/schemas/Requirement'
+ */
+
+/**
+* @schema HoursRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - required
+* - options
+* properties:
+*   required:
+*     type: integer
+*   options:
+*     type: array
+*     items:
+*     - $ref: '#/components/schemas/CourseRequirement'
+ */
+
+/**
+* @schema OtherRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - description
+* - condition
+* properties:
+*   description:
+*     type: string
+*   condition:
+*     type: string
+ */
+
+/**
+* @schema ChoiceRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - choices
+* properties:
+*   choices:
+*     $ref: '#/components/schemas/CollectionRequirement'
+ */
+
+/**
+* @schema LimitRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - max_hours
+* properties:
+*   max_hours:
+*     type: integer
+ */
+
+/**
+* @schema CoreRequirement
+* allOf:
+*   - $ref: '#/components/schemas/Requirement'
+*   - type: object
+* required:
+* - core_flag
+* - hours
+* properties:
+*   core_flag:
+*     type: string
+*   hours:
+*     type: integer
+ */
+
 // @TODO: Fix Model - Cannot inline interface{}
 type Requirement struct {
 	// Used to determine requirement type

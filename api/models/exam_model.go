@@ -7,6 +7,140 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// @TODO: Polymorphism
+// OpenAPI Specification:
+/**
+* @schema Exam
+* required:
+* - _id
+* - type
+* properties:
+*   _id:
+*     type: string
+*   type:
+*     type: string
+* discriminator:
+*   propertyName: type
+*   mapping:
+*     AP: APExam
+*     ALEKS: ALEKSExam
+*     CLEP: CLEPExam
+*     IB: IBExam
+*     CS placement: CSPlacementExam
+ */
+
+/**
+* @schema APExam
+* allOf:
+*   - $ref: '#/components/schemas/Exam'
+*   - type: object
+* required:
+* - name
+* - yields
+* properties:
+*   name:
+*     type: string
+*   yields:
+*     type: array
+*     items:
+*       $ref: "#/components/schemas/Outcome"
+ */
+
+/**
+* @schema ALEKSExam
+* allOf:
+*   - $ref: '#/components/schemas/Exam'
+*   - type: object
+* required:
+* - placement
+* properties:
+*   placement:
+*     type: array
+*     items:
+*       $ref: "#/components/schemas/Outcome"
+ */
+
+/**
+* @schema CLEPExam
+* allOf:
+*   - $ref: '#/components/schemas/Exam'
+*   - type: object
+* required:
+* - name
+* - yields
+* properties:
+*   name:
+*     type: string
+*   yields:
+*     type: array
+*     items:
+*       $ref: "#/components/schemas/Outcome"
+ */
+
+/**
+* @schema IBExam
+* allOf:
+*   - $ref: '#/components/schemas/Exam'
+*   - type: object
+* required:
+* - name
+* - level
+* - yields
+* properties:
+*   name:
+*     type: string
+*   level:
+*     type: string
+*   yields:
+*     type: array
+*     items:
+*       $ref: "#/components/schemas/Outcome"
+ */
+
+/**
+* @schema CSPlacementExam
+* allOf:
+*   - $ref: '#/components/schemas/Exam'
+*   - type: object
+* required:
+* - yields
+* properties:
+*   yields:
+*     type: array
+*     items:
+*       $ref: "#/components/schemas/Outcome"
+ */
+
+/**
+* @schema Outcome
+* required:
+* - requirement
+* - outcome
+* properties:
+*   requirement:
+*     $ref: "#/components/schemas/Requirement"
+*   outcome:
+*     type: array
+*     items:
+*       type: array
+*       items:
+*         OneOf:
+*         - type: string
+*         - $ref: "#/components/shemas/Credit"
+ */
+
+/**
+* @schema Credit
+* required:
+* - category
+* - credit_hours
+* properties:
+*   category:
+*     type: string
+*   credit_hours:
+*     type: int
+ */
+
 // @TODO: Fix Model - Cannot inline interface{}
 
 // @TODO: Choose implementation
@@ -72,11 +206,12 @@ type PotentialOutcomes struct {
 // @TODO: Handle Outcome types
 
 // messy and broken
-type Outcome struct {
-	CourseId     *primitive.ObjecID  `bson:",omitempty" json:",omitempty"`
-	Category     string              `json:"category,omitempty"`
-	Credit_hours int                 `json:"credit_hours,omitempty"`
-}
+
+	type Outcome struct {
+		CourseId     *primitive.ObjecID  `bson:",omitempty" json:",omitempty"`
+		Category     string              `json:"category,omitempty"`
+		Credit_hours int                 `json:"credit_hours,omitempty"`
+	}
 
 // ---------------------------
 

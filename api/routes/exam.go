@@ -10,6 +10,40 @@ func ExamRoute(router *gin.Engine) {
 	// All routes related to exams come here
 	examGroup := router.Group("/exam")
 
+	// @TODO: Handle 'yields'
+	/**
+	* @api [get] /exam
+	* scope: public
+	* bodyContentType: "application/json"
+	* description: "Returns all exams matching the query's string-typed key-value pairs"
+	* parameters:
+	* - name: "type"
+	*   in: "query"
+	*   description: "The type of exam"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "name"
+	*   in: "query"
+	*   description: "The name of the exam"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* - name: "level"
+	*   in: "query"
+	*   description: "The level of the IB exam (should it be an IB exam)"
+	*   required: false
+	*   schema:
+	*      type: "string"
+	* responses:
+	*   "200":
+	*     description: "A list of exams"
+	*     schema:
+	*       type: "array"
+	*		items:
+	*		  $ref: '#/components/schemas/Exam'
+	 */
+
 	examGroup.GET("/", controllers.ExamSearch())
 
 	/**

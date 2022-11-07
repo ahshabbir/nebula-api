@@ -1,22 +1,22 @@
 {
-    "openapi": "3.1.*",
-    "info": {
-        "title": "Nebula Labs API",
-        "summary": "The public Nebula Labs API",
-        "description": "The public Nebula Labs API for access to pertinent UT Dallas data",
-        "termsOfService": "",
-        "contact": {
-          "name": "",
-          "url": "",
-          "email": ""
-        },
-        "license": {
-          "name": "",
-          "url": ""
-        },
-        "version": "0.1.0"
-    },
-    "host": "api.utdnebula.com",
-    "basePath": "/",
-    "schemes": ["http"]
+  "openapi": "3.1.*",
+  "info": {
+      "title": "Nebula Labs API",
+      "summary": "The public Nebula Labs API",
+      "description": "The public Nebula Labs API for access to pertinent UT Dallas data",
+      "termsOfService": "",
+      "contact": {
+        "name": "",
+        "url": "",
+        "email": ""
+      },
+      "license": {
+        "name": "",
+        "url": ""
+      },
+      "version": "0.1.0"
+  },
+  "host": "api.utdnebula.com",
+  "basePath": "/",
+  "schemes": ["http"]
 }
